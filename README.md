@@ -23,17 +23,17 @@ Refer to Poulin & Haddad to determine whether the model implemented in this add-
 
 In a worksheet cell, use the __Vss__ function. The three arguments required are:
 
-1. Log octanol:water partition coefficient, log Pow
+1. Log octanol:water partition coefficient, log P<sub>ow</sub>
 2. Ionization class (N, WB, SB, A, or Z)
 3. Does drug chemical structure consist of at least one oxygen atom? (TRUE or FALSE)
 
-If the drug or chemical is not neutral (class N), supply a fourth argument: 
+If the drug or chemical is not neutral (not class N), supply a fourth argument: 
 
-4. pKa
+4. pK<sub>a</sub>
 
 If the drug or chemical is a zwitterion (class Z), supply a fifth argument: 
 
-5. pKa,base
+5. pK<sub>a</sub>,base
 
 Example:
 
