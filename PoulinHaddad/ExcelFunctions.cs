@@ -14,7 +14,7 @@ namespace PoulinHaddad
       [ExcelArgument("Does drug chemical structure consist of at least one oxygen atom? (TRUE|FALSE)")] bool containsOxygen
       )
     {
-      var isValidArg = Enum.TryParse(@class, out IonizationClass ionizationClass);
+      var isValidArg = Enum.TryParse(@class, true, out IonizationClass ionizationClass);
       if (!isValidArg) return ExcelError.ExcelErrorValue;
 
       return LogPvow(logPow, ionizationClass, containsOxygen);
@@ -24,7 +24,7 @@ namespace PoulinHaddad
     public static object Iwt(
       [ExcelArgument("Ionization class (N|WB|SB|A|Z)")] string @class,
       [ExcelArgument("pKa")] object pKa,
-      [ExcelArgument(Name = "pKa.base", Description = "pKa.base (zwitterion only)")] object pKa_base
+      [ExcelArgument(Name = "pKa,base", Description = "pKa,base (zwitterion only)")] object pKa_base
       )
     {
       return Iw(@class, pKa, pKa_base, 7.0);
@@ -34,7 +34,7 @@ namespace PoulinHaddad
     public static object Iwp(
       [ExcelArgument("Ionization class (N|WB|SB|A|Z)")] string @class,
       [ExcelArgument("pKa")] object pKa,
-      [ExcelArgument(Name = "pKa.base", Description = "pKa.base (zwitterion only)")] object pKa_base
+      [ExcelArgument(Name = "pKa,base", Description = "pKa,base (zwitterion only)")] object pKa_base
       )
     {
       return Iw(@class, pKa, pKa_base, 7.4);
@@ -45,7 +45,7 @@ namespace PoulinHaddad
       [ExcelArgument("Log octanol:water partition coefficient")] double logPow,
       [ExcelArgument("Ionization class (N|WB|SB|A|Z)")] string @class,
       [ExcelArgument("pKa")] object pKa,
-      [ExcelArgument(Name = "pKa.base", Description = "pKa.base (zwitterion only)")] object pKa_base
+      [ExcelArgument(Name = "pKa,base", Description = "pKa,base (zwitterion only)")] object pKa_base
       )
     {
       return fup(logPow, @class, pKa, pKa_base, false);
@@ -84,7 +84,7 @@ namespace PoulinHaddad
       [ExcelArgument("Ionization class (N|WB|SB|A|Z)")] string @class,
       [ExcelArgument("Does drug chemical structure consist of at least one oxygen atom? (TRUE|FALSE)")] bool containsOxygen,
       [ExcelArgument("pKa")] object pKa,
-      [ExcelArgument(Name = "pKa.base", Description = "pKa.base (zwitterion only)")] object pKa_base
+      [ExcelArgument(Name = "pKa,base", Description = "pKa,base (zwitterion only)")] object pKa_base
       )
     {
       return fut(tissue, logPow, @class, containsOxygen, pKa, pKa_base, false);
@@ -142,7 +142,7 @@ namespace PoulinHaddad
       [ExcelArgument("Ionization class (N|WB|SB|A|Z)")] string @class,
       [ExcelArgument("Does drug chemical structure consist of at least one oxygen atom? (TRUE|FALSE)")] bool containsOxygen,
       [ExcelArgument("pKa")] object pKa,
-      [ExcelArgument(Name = "pKa.base", Description = "pKa.base (zwitterion only)")] object pKa_base
+      [ExcelArgument(Name = "pKa,base", Description = "pKa,base (zwitterion only)")] object pKa_base
       )
     {
       object o;
@@ -166,7 +166,7 @@ namespace PoulinHaddad
       [ExcelArgument("Ionization class (N|WB|SB|A|Z)")] string @class,
       [ExcelArgument("Does drug chemical structure consist of at least one oxygen atom? (TRUE|FALSE)")] bool containsOxygen,
       [ExcelArgument("pKa")] object pKa,
-      [ExcelArgument(Name = "pKa.base", Description = "pKa.base (zwitterion only)")] object pKa_base
+      [ExcelArgument(Name = "pKa,base", Description = "pKa,base (zwitterion only)")] object pKa_base
       )
     {
       var tissues = _table1.Keys;
@@ -193,7 +193,7 @@ namespace PoulinHaddad
 
     private static object Iw(string @class, object pKa, object pKa_base, double pH)
     {
-      var isValidArg = Enum.TryParse<IonizationClass>(@class, out IonizationClass ionizationClass);
+      var isValidArg = Enum.TryParse<IonizationClass>(@class, true, out IonizationClass ionizationClass);
       if (!isValidArg) return ExcelError.ExcelErrorValue;
 
       switch (ionizationClass)
