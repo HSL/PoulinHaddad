@@ -130,7 +130,11 @@ namespace PoulinHaddad
 
       if (denominatorOnly) return denominator;
 
-      var fut = (1 + Iwt) / denominator;
+      o = ExcelFunctions.Iwp(@class, pKa, pKa_base);
+      if (o is ExcelError) return o;
+      var Iwp = (double)o;
+
+      var fut = (1 + Iwp) / denominator;
 
       return fut;
     }
